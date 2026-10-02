@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hetsoni007-leadgenlab.vercel.app/sitemap.xml
