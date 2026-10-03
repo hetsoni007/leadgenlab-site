@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f1f0e7">
+  <meta name="description" content="Build a local, human-reviewed prospect research brief from a public company signal. No AI or API request is made.">
+  <title>Local lead research brief | LeadGenLab</title>
+  <meta property="og:title" content="Local lead research brief | LeadGenLab">
+  <meta property="og:description" content="Build a human-reviewed prospect research brief from a public company signal. This local tool makes no AI or API request.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://hetsoni007-leadgenlab.vercel.app/tools/lead-research-brief.html">
+  <link rel="icon" type="image/svg+xml" href="../assets/leadgenlab-mark.svg">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../assets/learning.css">
+  <link rel="stylesheet" href="../assets/studio.css">
+  <link rel="stylesheet" href="../assets/lead-research-brief.css">
+</head>
+<body data-root="../">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="topline"><b>LEADGENLAB</b> · A browser-local research desk</div>
+  <div class="nav-shell">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="../index.html"><img class="brand-logo" src="../assets/leadgenlab-logo.svg" alt="LeadGenLab"></a>
+      <div class="navlinks" id="primary-navigation">
+        <a href="../workflows/index.html">Workflows</a><a href="../insights/index.html">Field notes</a>
+        <a href="../ai-updates/index.html">AI updates</a><a href="../about/index.html">About</a>
+        <a class="mobile-contact-link" href="../contact/index.html">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a class="button solid" href="../workflows/lead-research-loop.html">Read the research loop <span class="arrow" aria-hidden="true">↗</span></a>
+        <button class="menu-btn" aria-controls="primary-navigation" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+      </div>
+    </nav>
+  </div>
+  <main id="main-content">
+    <header class="brief-hero wrap">
+      <div class="brief-crumb"><a href="../index.html">Home</a><span>/</span><a href="index.html">Tools</a><span>/</span><span>Lead research brief</span></div>
+      <div class="brief-kicker"><span>LOCAL TOOL</span><i></i><span>NO EXTERNAL REQUESTS</span></div>
+      <h1>A better reason to <em>start a conversation.</em></h1>
+      <p class="brief-intro">Put one public company signal beside the context your team has. Leave with a reviewable brief—not a claim that the prospect is ready to buy.</p>
+      <div class="brief-hero-foot"><span>01 / Describe the evidence</span><span>02 / Check the connection</span><span>03 / Review before outreach</span></div>
+    </header>
+    <section class="brief-workspace wrap" aria-label="Lead research brief builder">
+      <form class="brief-form" id="research-form">
+        <div class="brief-form-head"><div><span class="brief-label">THE INPUT DESK</span><h2>Start with what you can verify.</h2></div><span class="brief-index">FIELD NOTE 01</span></div>
+        <p class="brief-help">Use public, non-sensitive information. The tool only formats what you type; it does not search for more.</p>
+        <div class="brief-fields">
+          <div class="brief-field"><label for="company">Company or account <span>Required</span></label><input id="company" name="company" autocomplete="organization" maxlength="140" required placeholder="e.g. Northstar Materials"></div>
+          <div class="brief-field"><label for="role">Role or team to contact <span>Optional</span></label><input id="role" name="role" maxlength="140" placeholder="e.g. VP, Revenue Operations"></div>
+          <div class="brief-field brief-field-wide"><label for="signal">Public signal <span>Required</span></label><textarea id="signal" name="signal" maxlength="900" required placeholder="What changed? Keep it factual and specific."></textarea><small>Example: The company announced a new distribution site in its newsroom.</small></div>
+          <div class="brief-field brief-field-wide"><label for="source">Source URL <span>Optional</span></label><input id="source" name="source" type="url" maxlength="500" inputmode="url" placeholder="https://…"><small>We do not open, fetch, or verify this address.</small></div>
+          <div class="brief-field brief-field-wide"><label for="context">Your product and problem context <span>Optional</span></label><textarea id="context" name="context" maxlength="900" placeholder="What problem do you help solve, for whom, and what is not a fit?"></textarea></div>
+        </div>
+        <div class="brief-form-actions"><button class="button solid" type="submit">Assemble the brief <span class="arrow" aria-hidden="true">↗</span></button><button class="brief-reset" type="reset">Clear fields</button></div>
+        <aside class="brief-privacy" aria-label="Privacy details">
+          <strong>Private by design, limited by design.</strong>
+          <p>This tool makes no AI or API request, does not fetch or verify the entered URL, does not save or send your input, and is only a drafting aid. Entered values are not included in analytics. Keep sensitive personal or confidential information out.</p>
+        </aside>
+      </form>
+      <section class="brief-output-panel" aria-labelledby="brief-output-title">
+        <div class="brief-output-top"><span class="brief-label">THE WORKING BRIEF</span><span class="brief-status"><i></i> BROWSER ONLY</span></div>
+        <div class="brief-empty" id="brief-empty">
+          <span class="brief-empty-number">01—04</span>
+          <h2 id="brief-output-title">Evidence first.<br><em>Then a reason.</em></h2>
+          <p>Your brief will appear here after you add a company and a public signal.</p>
+          <div class="empty-rule"><i></i><i></i><i></i></div>
+        </div>
+        <div class="brief-result" id="brief-result" hidden>
+          <div class="brief-result-heading"><span class="brief-label">DRAFT · VERIFY BEFORE USE</span><h2 id="brief-company"></h2><p id="brief-role"></p></div>
+          <div class="brief-section"><span>01 / OBSERVED SIGNAL</span><p id="brief-signal"></p></div>
+          <div class="brief-section"><span>02 / SOURCE TO CHECK</span><p id="brief-source"></p></div>
+          <div class="brief-section"><span>03 / POSSIBLE RELEVANCE</span><p id="brief-fit"></p></div>
+          <div class="brief-section"><span>04 / A HUMAN-REVIEWED OPENER</span><p id="brief-opener"></p></div>
+          <div class="brief-section brief-check"><span>BEFORE ANY OUTREACH</span><ul><li>Open the source yourself and confirm the detail, date, and context.</li><li>Decide whether the role and problem connection are genuinely relevant.</li><li>Check contact accuracy, permissions, and applicable outreach rules.</li><li>Edit the draft in your own voice. Do not present an inference as a fact.</li></ul></div>
+        </div>
+        <div class="brief-output-actions"><button class="button brief-copy" id="copy-brief" type="button" disabled>Copy brief</button><button class="brief-download" id="download-brief" type="button" disabled>Download .txt</button><p id="brief-status" role="status" aria-live="polite">No input is stored when you leave this page.</p></div>
+      </section>
+    </section>
+    <section class="brief-method">
+      <div class="wrap brief-method-inner"><div><span class="brief-label">A REASON, NOT A SHORTCUT</span><h2>Signals invite a check.<br><em>They do not prove intent.</em></h2></div><p>A public announcement can give you a relevant starting point. It cannot tell you what a particular person wants, whether they own the problem, or whether now is the right time. Make that judgment with evidence and care.</p><a class="button" href="../workflows/lead-research-loop.html">Read the full research loop <span class="arrow" aria-hidden="true">↗</span></a></div>
+    </section>
+  </main>
+  <footer class="footer"><div class="wrap"><div class="footer-top"><div><a class="brand" href="../index.html"><img class="brand-logo" src="../assets/leadgenlab-logo.svg" alt="LeadGenLab"></a><p class="footer-blurb">Public-source research for relevant, human-reviewed outreach.</p></div><div class="footer-links"><div class="footer-col"><strong>Explore</strong><a href="../workflows/lead-research-loop.html">Lead research loop</a><a href="../tools/index.html">Tools &amp; products</a><a href="../about/editorial-standards.html">Editorial standards</a></div><div class="footer-col"><strong>Connect</strong><a href="../contact/index.html">Contact Het</a><a href="mailto:het.soni@soniconsultancyservices.com">het.soni@soniconsultancyservices.com</a></div></div></div><div class="footer-bottom"><span>© <span data-year></span> LeadGenLab · Soni Consultancy Services</span><span>Research it · Make it relevant · Keep a human in the loop</span></div></div></footer>
+  <script src="../assets/lead-research-brief.js"></script>
+  <script src="../assets/site.js"></script>
+</body>
+</html>
