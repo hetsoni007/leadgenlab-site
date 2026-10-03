@@ -1,0 +1,73 @@
+.brief-hero{padding-top:43px;padding-bottom:28px}
+.brief-crumb{display:flex;gap:9px;align-items:center;margin-bottom:34px;color:#788277;font-size:11px}
+.brief-crumb a:hover{color:#45633f}
+.brief-kicker{display:flex;align-items:center;gap:10px;color:#637d48;font:700 9px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em}
+.brief-kicker span:first-child{padding:8px 10px;background:#dce7ca;color:#34513a}
+.brief-kicker i{width:4px;height:4px;border-radius:50%;background:#94a67b}
+.brief-hero h1{max-width:900px;margin:24px 0 15px;font:400 clamp(48px,8vw,96px)/.94 Georgia,"Times New Roman",serif;letter-spacing:-.066em}
+.brief-hero h1 em{color:#668247;font-weight:400}
+.brief-intro{max-width:690px;margin:0;color:#59675d;font-size:16px;line-height:1.8}
+.brief-hero-foot{display:flex;gap:0;flex-wrap:wrap;margin-top:40px;border-top:1px solid #d5d8cb}
+.brief-hero-foot span{padding:13px 24px 0 0;color:#697569;font:10px ui-monospace,SFMono-Regular,Menlo,monospace}
+.brief-workspace{display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);align-items:start;gap:22px;padding-bottom:82px}
+.brief-form,.brief-output-panel{border:1px solid #d5d8cb;background:#faf9f2}
+.brief-form{padding:clamp(21px,3vw,34px)}
+.brief-form-head{display:flex;justify-content:space-between;gap:16px;align-items:start}
+.brief-label{color:#627a4c;font:700 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.13em}
+.brief-form-head h2{margin:10px 0 0;font:400 clamp(26px,3vw,35px)/1.05 Georgia,serif;letter-spacing:-.04em}
+.brief-index{padding:7px 9px;border:1px solid #d8dbd0;color:#7b8578;font:9px ui-monospace,monospace;white-space:nowrap}
+.brief-help{max-width:440px;margin:11px 0 24px;color:#69766b;font-size:12px;line-height:1.65}
+.brief-fields{display:grid;grid-template-columns:1fr 1fr;gap:17px 13px}
+.brief-field{min-width:0}
+.brief-field-wide{grid-column:1/-1}
+.brief-field label{display:flex;justify-content:space-between;gap:10px;margin-bottom:7px;color:#34473b;font-size:11px;font-weight:700}
+.brief-field label span{color:#859080;font-size:9px;font-weight:500}
+.brief-field input,.brief-field textarea{width:100%;border:1px solid #d3d8cb;border-radius:2px;background:#f5f5ed;color:#26382e;font:13px/1.5 "Avenir Next",Avenir,"Segoe UI",sans-serif}
+.brief-field input{height:45px;padding:0 12px}
+.brief-field textarea{min-height:94px;padding:11px 12px;resize:vertical}
+.brief-field textarea::placeholder,.brief-field input::placeholder{color:#929a8f}
+.brief-field input:focus,.brief-field textarea:focus{outline:3px solid rgba(114,140,79,.2);border-color:#728c4f}
+.brief-field small{display:block;margin-top:6px;color:#818b7e;font-size:10px;line-height:1.5}
+.brief-form-actions{display:flex;align-items:center;gap:16px;margin-top:21px}
+.brief-form-actions .button{min-height:47px}
+.brief-reset,.brief-download{border:0;background:none;color:#566b4a;font-size:11px;font-weight:700;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.brief-privacy{margin-top:23px;padding:14px 15px;border-left:3px solid #82995b;background:#e9ecdf}
+.brief-privacy strong{font:17px Georgia,serif}
+.brief-privacy p{margin:6px 0 0;color:#566458;font-size:10px;line-height:1.65}
+.brief-output-panel{position:sticky;top:100px;min-height:610px;padding:24px 27px 17px;background:#f7f7ef}
+.brief-output-top{display:flex;justify-content:space-between;gap:15px;align-items:center;padding-bottom:14px;border-bottom:1px solid #dfe2d7}
+.brief-status{display:flex;align-items:center;gap:7px;color:#7a8678;font:8px ui-monospace,monospace;letter-spacing:.08em}
+.brief-status i{width:6px;height:6px;border-radius:50%;background:#8ca567}
+.brief-empty{padding:50px 2px 25px}
+.brief-empty-number{color:#829271;font:10px ui-monospace,monospace;letter-spacing:.08em}
+.brief-empty h2{margin:20px 0 13px;font:400 clamp(39px,5vw,59px)/.97 Georgia,serif;letter-spacing:-.055em}
+.brief-empty h2 em{color:#70894f;font-weight:400}
+.brief-empty p{max-width:310px;color:#69766b;font-size:12px;line-height:1.7}
+.empty-rule{display:flex;gap:7px;margin-top:65px}
+.empty-rule i{width:42px;height:4px;background:#dfe5d4}
+.empty-rule i:first-child{background:#839b60}
+.brief-result{padding:23px 2px 5px}
+.brief-result-heading{padding-bottom:18px;border-bottom:1px solid #dfe2d7}
+.brief-result-heading h2{margin:9px 0 4px;overflow-wrap:anywhere;font:400 32px/1.04 Georgia,serif;letter-spacing:-.04em}
+.brief-result-heading p{margin:0;color:#69766b;font-size:11px}
+.brief-section{padding:16px 0;border-bottom:1px solid #e1e3da}
+.brief-section>span{color:#6b814f;font:700 8px ui-monospace,monospace;letter-spacing:.1em}
+.brief-section p{margin:8px 0 0;color:#34473b;font:14px/1.65 Georgia,serif;white-space:pre-wrap;overflow-wrap:anywhere}
+.brief-check{border:0}
+.brief-check ul{margin:9px 0 0;padding-left:18px;color:#58665b;font-size:10px;line-height:1.6}
+.brief-check li+li{margin-top:5px}
+.brief-output-actions{display:flex;align-items:center;gap:13px;flex-wrap:wrap;padding-top:14px;border-top:1px solid #dfe2d7}
+.brief-output-actions .button{min-height:39px;padding:0 14px!important}
+.brief-copy{border-radius:3px!important}
+.brief-download:disabled,.brief-copy:disabled{opacity:.45;cursor:not-allowed}
+.brief-output-actions p{flex-basis:100%;margin:0;color:#7b867a;font-size:9px;line-height:1.5}
+.brief-method{padding:62px 0;background:#e7ebdf;border-top:1px solid #d5d8cb}
+.brief-method-inner{display:grid;grid-template-columns:1fr 1fr auto;align-items:center;gap:34px}
+.brief-method h2{margin:13px 0 0;font:400 clamp(32px,4vw,48px)/1.03 Georgia,serif;letter-spacing:-.05em}
+.brief-method h2 em{color:#668247;font-weight:400}
+.brief-method p{max-width:440px;margin:0;color:#58665b;font-size:12px;line-height:1.8}
+.brief-method .button{white-space:nowrap}
+.research-brief-cta{display:inline-flex;margin-top:17px}
+.field-callout .research-brief-cta{margin-top:14px}
+@media(max-width:900px){.brief-workspace{grid-template-columns:1fr}.brief-output-panel{position:static;min-height:0}.brief-method-inner{grid-template-columns:1fr 1fr}.brief-method-inner .button{grid-column:1/-1;justify-self:start}}
+@media(max-width:600px){.brief-hero{padding-top:30px}.brief-crumb{margin-bottom:24px}.brief-hero h1{font-size:clamp(44px,13vw,66px)}.brief-intro{font-size:14px}.brief-hero-foot{display:grid;grid-template-columns:1fr;gap:0;margin-top:28px}.brief-hero-foot span{padding:11px 0;border-bottom:1px solid #d5d8cb}.brief-workspace{padding-bottom:55px}.brief-form{padding:20px 16px}.brief-fields{grid-template-columns:1fr}.brief-field{grid-column:1/-1}.brief-output-panel{padding:19px 17px 14px}.brief-empty{padding-top:37px}.empty-rule{margin-top:45px}.brief-result-heading h2{font-size:29px}.brief-method{padding:44px 0}.brief-method-inner{grid-template-columns:1fr;gap:20px}.brief-method-inner .button{grid-column:auto;width:100%}}

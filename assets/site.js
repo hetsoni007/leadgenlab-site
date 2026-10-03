@@ -1,6 +1,65 @@
 (function(){
   const consentKey='lgl-consent';
   const root=document.body.dataset.root||'';
+  document.querySelectorAll('.footer .brand-logo').forEach(logo=>{logo.src=root+'assets/leadgenlab-logo-light.svg'});
+  const redesign=document.createElement('link');
+  redesign.rel='stylesheet';
+  redesign.href=root+'assets/site-redesign.css';
+  document.head.appendChild(redesign);
+  const topline=document.querySelector('.topline');
+  if(topline){const tail=[...topline.childNodes].find(node=>node.nodeType===Node.TEXT_NODE&&node.textContent.trim());if(tail)tail.textContent=' · Public signals, researched with care'}
+  const primaryNav=document.querySelector('.navlinks');
+  if(primaryNav){
+    const navigation=[
+      ['Workflows','workflows/index.html'],
+      ['Field notes','insights/index.html'],
+      ['Guides','guides/index.html'],
+      ['AI updates','ai-updates/index.html'],
+      ['About','about/index.html'],
+      ['Research brief','tools/lead-research-brief.html'],
+      ['Talk with Het','contact/index.html','mobile-contact-link']
+    ];
+    const links=navigation.map(([label,path,className])=>{
+      const link=document.createElement('a');
+      link.href=root+path;
+      link.textContent=label;
+      if(className)link.className=className;
+      if(location.pathname.endsWith('/'+path))link.setAttribute('aria-current','page');
+      return link;
+    });
+    primaryNav.replaceChildren(...links);
+  }
+  const navCta=document.querySelector('.nav-actions .button.solid');
+  if(navCta){
+    navCta.href=root+'workflows/lead-research-loop.html';
+    navCta.replaceChildren(document.createTextNode('Try the workflow '));
+    const arrow=document.createElement('span');
+    arrow.className='arrow';arrow.setAttribute('aria-hidden','true');arrow.textContent='↗';
+    navCta.append(arrow);
+  }
+  const footer=document.querySelector('.footer');
+  if(footer){
+    const blurb=footer.querySelector('.footer-blurb');
+    if(blurb)blurb.textContent='Practical, source-aware lead research and human-reviewed outreach for lean teams.';
+    const columns=footer.querySelectorAll('.footer-col');
+    if(columns[0]?.querySelector('strong'))columns[0].querySelector('strong').textContent='Explore';
+    if(columns[1]?.querySelector('strong'))columns[1].querySelector('strong').textContent='Connect';
+    const footerTagline=footer.querySelector('.footer-bottom span:last-child');
+    if(footerTagline)footerTagline.textContent='Research it · Make it relevant · Keep a human in the loop';
+  }
+  const researchToolLink=document.createElement('a');
+  researchToolLink.href=root+'tools/lead-research-brief.html';
+  researchToolLink.className='button lime';
+  researchToolLink.innerHTML='Build a research brief <span class="arrow" aria-hidden="true">↗</span>';
+  if(document.querySelector('.home-hero-actions'))document.querySelector('.home-hero-actions').append(researchToolLink);
+  if(location.pathname.includes('/workflows/lead-research-loop.html')){
+    const callout=document.querySelector('.field-callout');
+    if(callout){const link=researchToolLink.cloneNode(true);link.classList.add('research-brief-cta');link.setAttribute('aria-label','Open the local lead research brief tool');callout.append(link)}
+  }
+  if(location.pathname.endsWith('/tools/')||location.pathname.endsWith('/tools/index.html')){
+    const hero=document.querySelector('.page-hero');
+    if(hero){const link=researchToolLink.cloneNode(true);link.classList.add('research-brief-cta');hero.append(link)}
+  }
   function track(name,details={}){
     if(localStorage.getItem(consentKey)!=='analytics')return;
     const event={event:name, ...details};
@@ -29,6 +88,7 @@
       ['Practical guides for everyday technology',root+'guides/index.html','Guides'],
       ['Interactive Workflow Lab',root+'workflows/index.html','Practice'],
       ['Lead research to relevant outreach',root+'workflows/lead-research-loop.html','Workflow'],
+      ['Local lead research brief builder',root+'tools/lead-research-brief.html','Prospect research · Local tool'],
       ['Turn AI releases into team learning',root+'workflows/release-to-learning.html','Workflow'],
       ['Connect engagement to acquisition cost',root+'workflows/engagement-to-cac.html','Workflow']
     ];
@@ -50,13 +110,60 @@
   setTimeout(()=>{if(!engaged){engaged=true;track('engaged_30_seconds',{page_path:location.pathname})}},30000);
   window.addEventListener('scroll',()=>{if(scrolled)return;const max=document.documentElement.scrollHeight-window.innerHeight;if(max>0&&window.scrollY/max>=.5){scrolled=true;track('engaged_50_percent_scroll',{page_path:location.pathname})}},{passive:true});
   document.addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const href=a.getAttribute('href')||'';if(a.hasAttribute('data-newsletter-subscribe'))track('newsletter_subscribe_click',{link_url:href});else if(/services|contact/.test(href))track('service_interest_click',{link_url:href,link_text:a.textContent.trim().slice(0,80)});else if(/newsletter/.test(href)||a.closest('.newsletter'))track('newsletter_interest_click',{link_url:href});});
-  const form=document.querySelector('[data-demo-form]');if(form)form.addEventListener('submit',e=>{e.preventDefault();const msg=form.parentElement.querySelector('[data-form-status]');if(msg)msg.textContent='Thanks. This preview form is ready to connect to your email or CRM platform.';track(form.closest('.newsletter')?'newsletter_signup_preview':'project_enquiry_preview')});
+  const form=document.querySelector('[data-demo-form]');
+  if(form)form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    if(!form.reportValidity())return;
+    const values=new FormData(form);
+    const subject='LeadGenLab enquiry: '+(values.get('type')||'Project enquiry');
+    const body=[
+      'Hello Het,','','Name: '+(values.get('name')||''),
+      'Email: '+(values.get('email')||''),
+      'Enquiry type: '+(values.get('type')||''),
+      'Timing: '+(values.get('timeline')||''),
+      '', 'A little about the goal:', (values.get('message')||'(No additional detail provided.)')
+    ].join('\n');
+    const status=form.querySelector('[data-form-status]');
+    const mailto='mailto:het.soni@soniconsultancyservices.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    if(status)status.textContent='Your email app should open with a draft. Nothing is sent until you choose Send.';
+    const note=form.querySelector('.form-note');
+    if(note)note.textContent='This opens an email draft to Het. Nothing is sent or stored by this site; review the draft and press Send in your email app when you are ready.';
+    window.location.href=mailto;
+    track('project_enquiry_draft_prepared');
+  });
+  if(form){
+    const note=form.querySelector('.form-note'),submit=form.querySelector('[type="submit"]'),status=form.querySelector('[data-form-status]');
+    if(note)note.textContent='This opens an email draft addressed to Het. Nothing is sent until you review the message and press Send in your email app.';
+    if(submit)submit.textContent='Prepare email draft';
+    if(status){
+      const copyButton=document.createElement('button');
+      copyButton.type='button';copyButton.className='brief-reset contact-copy';copyButton.textContent='Copy details instead';
+      submit?.parentElement.insertBefore(copyButton,status);
+      copyButton.addEventListener('click',async()=>{
+        const data=new FormData(form);
+        const text=[
+          'To: het.soni@soniconsultancyservices.com',
+          'Subject: LeadGenLab enquiry: '+(data.get('type')||'Project enquiry'),
+          '',
+          'Name: '+(data.get('name')||''),
+          'Email: '+(data.get('email')||''),
+          'Enquiry type: '+(data.get('type')||''),
+          'Timing: '+(data.get('timeline')||''),
+          '',
+          'A little about the goal:',
+          (data.get('message')||'(No additional detail provided.)')
+        ].join('\n');
+        try{await navigator.clipboard.writeText(text);status.textContent='Enquiry details copied. Paste them into an email to Het; nothing has been sent.'}
+        catch{status.textContent='Clipboard is unavailable. Use the direct email link to write Het.'}
+      });
+    }
+  }
   const filters=document.querySelectorAll('[data-filter]'),items=document.querySelectorAll('[data-category]');filters.forEach(btn=>btn.addEventListener('click',()=>{filters.forEach(b=>b.classList.remove('active'));btn.classList.add('active');const chosen=btn.dataset.filter;items.forEach(i=>i.classList.toggle('hidden',chosen!=='all'&&i.dataset.category!==chosen));track('content_filter_used',{filter:chosen})}));
   const search=document.querySelector('[data-card-search]');if(search)search.addEventListener('input',()=>{const q=search.value.toLowerCase();items.forEach(i=>i.classList.toggle('hidden',!i.textContent.toLowerCase().includes(q)))});
   const progress=document.querySelector('.progress'),article=document.querySelector('.prose');if(progress&&article)window.addEventListener('scroll',()=>{const d=article.scrollHeight-window.innerHeight;progress.style.width=(d>0?Math.min(100,Math.max(0,(window.scrollY-article.offsetTop)/d*100)):0)+'%'},{passive:true});
   document.querySelectorAll('[data-reaction]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-reaction]').forEach(b=>b.disabled=true);const out=document.querySelector('[data-reaction-status]');if(out)out.textContent='Thanks—your feedback helps us make future explainers clearer.';track('article_feedback',{response:btn.textContent.trim()})}));
   const finder=document.querySelector('[data-tool-finder]');if(finder)finder.addEventListener('submit',e=>{e.preventDefault();const need=finder.querySelector('[name=need]').value,result=document.querySelector('[data-finder-result]');const copy={writing:'Start with a general-purpose AI assistant. Compare how well it follows instructions, cites sources, handles your files, and protects your data.',research:'Look for a research assistant that links claims to sources and lets you inspect citations. Verify important claims against original sources.',creative:'Try a tool designed for your format—image, audio, or video—and compare usage rights, editing controls, and export quality.',organizing:'Consider an assistant that works inside the calendar, notes, or task app you already use. Check integrations and data controls before connecting accounts.'};result.innerHTML='<strong>Your starting point</strong><br>'+copy[need]+'<br><span class="note">This is a general starting point, not a paid endorsement. We’ll publish comparisons as the directory grows.</span>';result.classList.add('show');track('tool_finder_completed',{need})});
-  const estimator=document.querySelector('[data-estimator]');if(estimator)estimator.addEventListener('submit',e=>{e.preventDefault();const type=estimator.querySelector('[name=scope]').value,level=estimator.querySelector('[name=complexity]').value;const tips={lean:'A focused first version can center on one core task. Validate that workflow, then add capabilities from what users actually need.',standard:'Map the main user roles and integrations, then choose the smallest release that proves the core value.',advanced:'Split the idea into phases. Start with product discovery and technical risk review before committing to a full build.'};const result=document.querySelector('[data-estimate-result]');result.innerHTML='<strong>A useful next step for your '+type+'</strong><br>'+tips[level]+'<br><a class="text-link" href="/contact/index.html">Discuss your idea with Soni Consultancy Services ↗</a><br><span class="note">Planning guidance only—not a price quote.</span>';result.classList.add('show');estimator.querySelector('[name=scope-summary]').value=type+' / '+level;track('project_planner_completed',{scope:type,complexity:level})});
+  const estimator=document.querySelector('[data-estimator]');if(estimator)estimator.addEventListener('submit',e=>{e.preventDefault();const type=estimator.querySelector('[name=scope]').value,level=estimator.querySelector('[name=complexity]').value;const tips={lean:'A focused first version can center on one core task. Validate that workflow, then add capabilities from what users actually need.',standard:'Map the main user roles and integrations, then choose the smallest release that proves the core value.',advanced:'Split the idea into phases. Start with product discovery and technical risk review before committing to a full build.'};const result=document.querySelector('[data-estimate-result]');result.innerHTML='<strong>A useful next step for your '+type+'</strong><br>'+tips[level]+'<br><a class="text-link" href="'+root+'contact/index.html">Discuss your idea with Soni Consultancy Services ↗</a><br><span class="note">Planning guidance only—not a price quote.</span>';result.classList.add('show');estimator.querySelector('[name=scope-summary]').value=type+' / '+level;track('project_planner_completed',{scope:type,complexity:level})});
   document.querySelectorAll('[data-copy-link]').forEach(b=>b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.href);b.textContent='Copied';track('article_link_copied')}catch{b.textContent='Copy unavailable'}}));
   const learningPaths={
     general:{label:'GENERAL READER',example:'Choose one update you have seen recently.',simple:'Start with the latest update at the top of this page. Open its source and mark one detail you want to understand.',tasks:[['Notice','What changed?','Read the plain-English summary. Find the exact feature, model, or access change.'],['Relate','Why could it matter?','Connect the update to a question, task, or decision in your own life.'],['Try','One safe task','Try one low-risk example. Do not share private details you would not want stored.'],['Reflect','What did you learn?','Check the result against a trusted source. Decide whether to use it again.']],technical:'Start at the latest entry. Separate a capability announcement from an availability change, then inspect the source and limits.'},
