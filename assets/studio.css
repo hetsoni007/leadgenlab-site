@@ -102,3 +102,13 @@ img,svg,video,canvas{max-width:100%;height:auto}
   .studio-orbit,.studio-glow,.demo-pulse,.demo-object{animation:none!important}
   .workflow-stage-list li.is-active,.latest-card:hover,.route-thread>a:hover{transform:none!important}
 }
+
+/* Workflow Lab: stay usable in narrow article columns */
+.workflow-form{grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.workflow-form label{min-width:0}
+.workflow-form label:first-child{grid-column:1/-1}
+.workflow-form .button{justify-content:center}
+.workflow-stage-list{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
+.workflow-stage-list li{min-width:0}
+.workflow-stage-list li>div{display:grid;gap:4px;min-width:0}
+.workflow-stage-list li strong,.workflow-stage-list li small{display:block;overflow-wrap:anywhere}
